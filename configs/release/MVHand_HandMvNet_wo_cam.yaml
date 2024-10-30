@@ -1,0 +1,56 @@
+name: handmvnet
+base_output_dir: ./outputs/debug
+data:
+  name: mvhand
+  batch_size: 2
+  dataset_dir: data/mvhand
+  mask_size: 32
+  depth_size: 32
+  heatmap_size: 32
+  image_size: 256
+  mano_models_dir: src/mano
+  num_workers: 6
+  augment: true
+  pad_image: true
+model:
+  selected_views:
+  - 0
+  - 1
+  - 2
+  - 3
+  fusion: cross_attn  # cross_attn, cross_attn_learnable_query
+  fusion_layers: 5
+  pos_enc:
+  - pos2d
+  # - crop    
+  - sin 
+  use_gcn: true
+  backbone: "resnet"
+  backbone_type: "50_paper"  # 18, 34, 50_paper
+  backbone_early_return: 3
+  backbone_channels: # output
+  - 1024
+  backbone_pretrained: true
+train:
+  debug: false
+  vis_every_n_epochs: 10
+  epochs: 100
+  accumulate_batch: 2
+  gpus: 2
+  mask_invisible_joints: false
+  root_relative: true
+  loss_weights:
+    heatmap: 10.
+    joints_2d: 1.
+    joints_3d: 1000
+    # g2d: 1.  # loss b/w backprojected predicted 3d joints and groundtruth 2d joints
+    # p2d: 0.5  # loss b/w backprojected predicted 3d joints and predicted 2d joints
+  lr: 0.0001
+  lr_scheduler:
+    gamma: 0.75
+    milestones:
+    - 20
+    - 40
+    - 60
+    - 80
+  weight_decay: 0.05
