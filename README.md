@@ -30,6 +30,14 @@ In this work, we present HandMvNet, one of the first real-time method designed t
 - Pytorch 2.0.1
 - Lightning 2.0.6
 
+# Datasets
+We used following three datasets:
+- [DexYCB](https://dex-ycb.github.io/)
+- [HO3Dv3](https://github.com/shreyashampali/ho3d): The packed dataset tars of HO3D used for training and evaluation can be downloaded from [here](https://huggingface.co/datasets/JubSteven/POEM-v2/tree/main).
+- [MVHand](https://github.com/ShichengChen/multiviewDataset)
+  
+
+
 # Training:
 ```
 python src/train.py --config configs/release/HO3D_HandMvNet.yaml
@@ -50,7 +58,16 @@ python src/eval_fps.py --config configs/release/HO3D_HandMvNet.yaml
 # Citation
 If you find our work useful in your research, please consider citing:
 ```
-
+@inproceedings{Ali2025,
+  author    = {Ali, Muhammad Asad and Robertini, Nadia and Stricker, Didier},
+  title     = {HandMvNet: Real-Time 3D Hand Pose Estimation Using Multi-View Cross-Attention Fusion},
+  booktitle = {Proceedings of the 20th International Joint Conference on Computer Vision, Imaging and Computer Graphics Theory and Applications - Volume 2: VISAPP},
+  year      = {2025},
+  pages     = {555--562},
+  isbn      = {978-989-758-728-3},
+  issn      = {2184-4321},
+  doi       = {10.5220/0013107300003912}
+}
 ```
 # Acknowledgement
 The following repositories are used in HandMvNet, either in close to original form or as an inspiration:
